@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from requests.auth import HTTPBasicAuth # example 1/2 of Basic Authentication
 from requests.auth import HTTPDigestAuth #example 1 of Digest Authentication
+import re
 
 # https://realpython.com/beautiful-soup-web-scraper-python/#reasons-for-automated-web-scraping
 # https://pypi.org/project/requests/
@@ -39,7 +40,7 @@ soup = BeautifulSoup(x.content, "html.parser")
 
 # this website has div CLASS so we find by class
 items = soup.find_all("div")
-images = soup.find_all("script")
+script = soup.find_all("script")
 
 #print(items)
 
@@ -86,10 +87,9 @@ for subheader in items:
 
 print("images!!")
 
-for image in images:
-    img = image.find("img")
-    if img:
-        print(f"{img} \n")
+images = soup.find_all()
+
+
 
 print("links")
 
@@ -98,12 +98,17 @@ for link in links:
     link_url = link["href"]
     print(f"link: {link_url}\n")
 
+
+images = soup.find_all('img', {'src': re.compile('.jpg')})
+
+for image in images:
+    print(image['src']) 
+
+
 # find Elements by Class Name and Text Content
 
-webscraper = soup.find_all("h2", string="web scraper")
+webscraper = soup.find_all("h2", string="web scraper") 
 print(webscraper)
-
-
 
 
 

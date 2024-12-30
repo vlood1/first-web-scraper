@@ -85,7 +85,7 @@ for subheader in items:
         print(h6.text + "\n")
 
 
-print("images!!")
+
 
 images = soup.find_all()
 
@@ -98,6 +98,9 @@ for link in links:
     link_url = link["href"]
     print(f"link: {link_url}\n")
 
+
+
+print("images!!")
 
 images = soup.find_all('img', {'src': re.compile('.jpg')})
 
